@@ -1,31 +1,46 @@
-import {pool} from '../config/config.js'
-const getPeersDb = async ()=>{
-    let [data] = await pool.query('SELECT * FROM peers')
+import {createPool} from 'mysql2/promise'
+//promise- allows to handle asynchronys
+import {config} from 'dotenv'
+config()
+
+const pool =createPool({
+     host: process.env.HOST,
+     user: process.env.USER,
+     database: process.env.DATABASE,
+     password: process.env.PASSWORD
+})
+
+const getUsersDb = async ()=>{
+    let [data] = await pool.query('SELECT * FROM users')
     return data
 }
-const getPeerDb = async (id) =>{
-    let [[data]] = await pool.query('SELECT * FROM peers WHERE peers_id = ?',[id])
+const getUserDb = async (id) =>{
+    let [[data]] = await pool.query('SELECT * FROM users WHERE userID = ?',[id])
     return data
 }
-const insertPeerDb = async(name, age, color,food) =>{
+const insertUserDb = async(firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile) =>{
     let [data] = await pool.query(`
-        INSERT INTO peers
-        (peer_name,peer_age,peer_fav_colour,peer_fav_food)
+        INSERT INTO users
+        (firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile)
         VALUES (?,?,?,?)
-        `,[name,age,color,food])
-    return 'hehe'
+        `,[firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile])
+    return data
 }
-const deletePeerDb = async(id) =>{
-    await pool.query('DELETE FROM peers WHERE peers_id = ?', [id])
+const deleteUserDb = async(id) =>{
+    await pool.query(`
+    DELETE FROM users WHERE userID = ?`, [id])
 }
-const updatePeerDB = async (id,name,age,colour,food)=>{
-    await pool.query('UPDATE peers SET peer_name = ?,peer_age = ?, peer_fav_colour = ?,peer_fav_food = ?  WHERE peers_id = ?',[name,age,colour,food,id]
-    )
+
+const updateUserDb = async(id) =>{
+    await pool.query(`
+    UPDATE users
+    SET firstName = ?,lastName = ?, userAge = ?,Gender = ?, userRole = ?,emailAdd = ?,userPass = ?,userProfile = ?  
+    WHERE userID = ?`,[firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile])
 }
 // console.log(await insertPeer('Matthew','23','purple','gatsby'))
-console.log(await getPeersDb());
+console.log(await getUsersDb());
 // console.log(await getPeer(1));
-export {getPeersDb, getPeerDb, insertPeerDb, deletePeerDb, updatePeerDB}
+export {getUsersDb, getUserDb, insertUserDb, deleteUserDb, updateUserDb}
 
 
 

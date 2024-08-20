@@ -1,16 +1,12 @@
-import express from 'express'
-import { fetchProduct, fetchProduct, insertProduct, deleteProducts, updateProduct } from '../controller/productsController.js'
+import express from 'express';
+import { fetchProduct, insertProduct, deleteProduct, updateProduct } from '../controller/productsController.js';
 
-const router = express.Router()
-  
-router.get('/fetchProducts', fetchUser)
+const router = express.Router();
 
-router.get('/fetchProducts/:id', fetchUser)
+router.get('/products', fetchProduct);
+router.get('/products/:id', fetchProduct);
+router.post('/products/addProduct', insertProduct);
+router.patch('/products/update/:id', updateProduct);
+router.delete('/products/:id', deleteProduct);
 
-router.post('/insert', insertUser)
-
-router.post('/delete/:id', deleteUser)
-
-router.post('/update', updateUser)
- 
-export default router
+export default router;

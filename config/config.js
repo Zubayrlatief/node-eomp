@@ -11,4 +11,4 @@ const pool =createPool({
 })
 //pool saves connection (iff sending query it saves it)
 
-export {pool}
+export default pool

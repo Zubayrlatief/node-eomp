@@ -31,21 +31,22 @@
 // npm i bcrypt
 //npm i jsonwebtoken
 //"dev":"nodemon index.js"
-
 import express from 'express'
-import peersRouter from './routes/users.js'
-import { insertPeerDb } from './model/usersDb.js'
+
+import productsRouter from './routes/productsRouter.js'
+import usersRouter from './routes/usersRouter.js'
 
 let port = process.env.PORT || 5001
 const app = express()
 
-app.use('/peers', peersRouter)
-app.use('')
+app.use(express.static('public'))
+app.use(express.json())
 
-
-
-
-
+app.use('/products', productsRouter)
+app.use('/users', usersRouter)
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`)
+  })
 
 //creating server
 //port number must be dynamic and cant be the same as mysql

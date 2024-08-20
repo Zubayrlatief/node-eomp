@@ -1,46 +1,43 @@
-// import {pool} from '../config/config.js'
-import {createPool} from 'mysql2/promise'
-import {config} from 'dotenv'
+import { createPool } from 'mysql2/promise';
+import { config } from 'dotenv';
+config();
 
-config()
-
-const pool =createPool({
+const pool = createPool({
     host: process.env.HOST,
     user: process.env.USER,
     database: process.env.DATABASE,
     password: process.env.PASSWORD
-})
+});
 
-const getPeersDb = async()=>{
-    let [data] = await pool.query('SELECT * FROM peers')
+const getProductsDb = async () => {
+    let [data] = await pool.query('SELECT * FROM products');
     return data;
-} 
+};
 
-const getPeerDb = async (id) =>{
-    let[[data]] = await pool.query('SELECT * FROM peers WHERE id = ?',[id])
-    return data
-}
+const getProductDb = async (id) => {
+    let [[data]] = await pool.query('SELECT * FROM products WHERE prodID = ?', [id]);
+    return data;
+};
 
-const insertPeerDb = async(name, surname, age, colour, food) =>{
+const insertProductDb = async (Name, quantity, amount, Category, Url) => {
     let [data] = await pool.query(`
-        INSERT INTO peers (name, surname, age, fav_colour, fav_food)
+        INSERT INTO products 
+        (Name, quantity, amount, Category, Url)
         VALUES (?,?,?,?,?)
-        `, [name, surname, age, colour, food])
-}
+        `, [Name, quantity, amount, Category, Url]);
+};
 
-const deletePeerDb = async(id) =>{
+const deleteProductDb = async (id) => {
     await pool.query(`
-    DELETE FROM peers 
-    WHERE id = ?`,[id])
-}
+    DELETE FROM products
+    WHERE id = ?`, [id]);
+};
 
-const updatePeerDb = async(id) =>{
+const updateProductDb = async (id, Name, quantity, amount, Category, Url) => {
     await pool.query(`
-    UPDATE peers
-    SET name = ? surname = ? age ? fav_colour = ? fav_food = ?
-    WHERE id = ?`,[name, surname, age, colour, food, id])
-}
+    UPDATE products
+    SET Name = ?, quantity = ?, amount = ?, Category = ?, Url = ?
+    WHERE id = ?`, [Name, quantity, amount, Category, Url, id]);
+};
 
-console.log(await getPeersDb());
-
-export {getPeersDb, getPeerDb, insertPeerDb, deletePeerDb, updatePeerDb}
+export { getProductsDb, getProductDb, insertProductDb, deleteProductDb, updateProductDb };

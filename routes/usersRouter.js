@@ -1,16 +1,12 @@
-import express from 'express'
-import { fetchUser, fetchUser, insertUser, deleteUser, updateUser } from '../controller/usersController.js'
+import express from 'express';
+import { fetchUsers, fetchUser, insertUser, deleteUser, updateUser } from '../controller/usersController.js';
 
-const router = express.Router()
-  
-router.get('/fetchUsers', fetchUser)
+const router = express.Router();
 
-router.get('/fetchUsers/:id', fetchUser)
+router.get('/users', fetchUsers);
+router.get('/users/:id', fetchUser);
+router.post('/register', insertUser);
+router.patch('/users/update/:id', updateUser);
+router.delete('/users/delete/:id', deleteUser);
 
-router.post('/insert', insertUser)
-
-router.post('/delete/:id', deleteUser)
-
-router.post('/update', updateUser)
- 
-export default router
+export default router;
