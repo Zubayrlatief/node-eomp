@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <p class="lead">
-                JT &copy; <span id="currYear"></span>
+                Z&M pet store &copy; <span id="currYear"></span>
             </p>
         </div>
     </div>

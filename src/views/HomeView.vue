@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="container">
     <div class="row">
       <h2 class="display-2">Welcome to our store</h2>
@@ -24,9 +24,9 @@
       <Spinner />
     </div>
   </div>
-</template>
+</template> -->
 
-<script>
+<!-- <script>
 import Card from '@/components/Card.vue'
 import Spinner from '@/components/Spinner.vue'
 export default {
@@ -44,4 +44,4 @@ export default {
     this.$store.dispatch('recentProducts')
   }
 }
-</script>
+</script> -->

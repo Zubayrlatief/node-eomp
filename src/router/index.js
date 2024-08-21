@@ -12,21 +12,6 @@ const routes = [
     component: () => import('@/views/AboutView.vue')
   },
   {
-    path: '/products',
-    name: 'products',
-    component: () => import('@/views/ProductsView.vue')
-  },
-  {
-    path: '/product/:id',
-    name: 'product',
-    component: () => import('@/views/ProductDetails.vue')
-  },
-  {
-    path: '/checkout',
-    name: 'checkout',
-    component: () => import('@/views/CheckoutView.vue')
-  },
-  {
     path: '/admin',
     name: 'admin',
     component: () => import('@/views/AdminView.vue')
@@ -34,24 +19,8 @@ const routes = [
   {
     path: '/reachUs',
     name: 'reachUs',
-    component: () => import('@/views/ReachUs.vue')
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/views/LoginView.vue')
-  },
-  {
-    path: '/logout',
-    name: 'logout',
-    component: () => import('@/views/LoginView.vue')
-  },
-  {
-    path: '/signup',
-    name: 'signup',
-    component: () => import('@/views/SignUp.vue')
+    component: () => import('@/views/ContactUs.vue')
   }
-
 ]
 
 const router = createRouter({
