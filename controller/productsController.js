@@ -1,4 +1,6 @@
 import { getProductsDb, getProductDb, insertProductDb, deleteProductDb, updateProductDb } from '../model/productsDb.js'
+
+//fetch all products
 const fetchProducts = async(req,res)=>{
     res.json(await getProductsDb())
 }
@@ -10,26 +12,21 @@ const fetchProduct = async(req,res)=>{
 
 //insert//add
 const insertProduct = async(req,res)=>{
-    let {prodID, prodName, quantity, amount, Category, prodUrl } =req.body
-    await insertProdctDb(prodID, prodName, quantity, amount, Category, prodUrl)
-    res.send('Data was inserted successfully')
+    let { prodName, quantity, amount, Category, prodUrl } =req.body
+    await insertProductDb( prodName, quantity, amount, Category, prodUrl )
+    res.send('product was inserted successfully')
 }
 
 //delete
 const deleteProduct = async(req,res)=>{
     await deleteProductDb(req.params.id)
-    res.send('Peer has been deleted')
+    res.send('product has been deleted')
 }
 
 //update
-const updateProduct = async(req,res)=>{
-    let {userID, firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile} = req.body
-    let user = await getProductDb(req.params.id)
-    userID ? name=name: name = peer.peer_name
-    age ? age=age: age = peer.peer_age
-    colour ? colour=colour: colour = peer.peer_fav_colour
-    food ? food=food: food = peer.peer_fav_food
-    await updateProductsDB(req.params.userID, firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile)
-    res.send('Update was successful')
+const updateProduct = async(req, res) => {
+    let { prodName, quantity, amount, Category, prodUrl } = req.body;
+    await updateProductDb(req.params.prodID, prodName, quantity, amount, Category, prodUrl);
+    res.send('Product has been updated');
 }
 export {fetchProducts, fetchProduct, insertProduct, deleteProduct, updateProduct}

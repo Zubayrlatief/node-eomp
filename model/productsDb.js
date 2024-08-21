@@ -19,25 +19,30 @@ const getProductDb = async (id) => {
     return data;
 };
 
-const insertProductDb = async (Name, quantity, amount, Category, Url) => {
+
+//insert
+const insertProductDb = async (prodName, quantity, amount, Category, prodUrl) => {
     let [data] = await pool.query(`
         INSERT INTO products 
-        (Name, quantity, amount, Category, Url)
+        (prodName, quantity, amount, Category, prodUrl)
         VALUES (?,?,?,?,?)
-        `, [Name, quantity, amount, Category, Url]);
+        `, [prodName, quantity, amount, Category, prodUrl]);
 };
 
-const deleteProductDb = async (id) => {
+//delete
+const deleteProductDb = async (prodID) => {
     await pool.query(`
     DELETE FROM products
-    WHERE id = ?`, [id]);
+    WHERE prodID = ?`, [prodID]);
 };
 
-const updateProductDb = async (id, Name, quantity, amount, Category, Url) => {
+
+//update//patch
+const updateProductDb = async (prodID, prodName, quantity, amount, Category, prodUrl) => {
     await pool.query(`
     UPDATE products
-    SET Name = ?, quantity = ?, amount = ?, Category = ?, Url = ?
-    WHERE id = ?`, [Name, quantity, amount, Category, Url, id]);
+    SET prodName = ?, quantity = ?, amount = ?, Category = ?, prodUrl = ?
+    WHERE prodID = ?`, [prodName, quantity, amount, Category, prodUrl, prodID]);
 };
 
 export { getProductsDb, getProductDb, insertProductDb, deleteProductDb, updateProductDb };

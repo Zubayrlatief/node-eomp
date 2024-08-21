@@ -3,10 +3,10 @@ import { fetchProduct, insertProduct, deleteProduct, updateProduct } from '../co
 
 const router = express.Router();
 
-router.get('/products', fetchProduct);
+router.get('/', fetchProduct);
 router.get('/products/:id', fetchProduct);
-router.post('/products/addProduct', insertProduct);
-router.patch('/products/update/:id', updateProduct);
-router.delete('/products/:id', deleteProduct);
+router.post('/addProduct', insertProduct);
+router.patch('/update/:id', updateProduct);
+router.delete('/delete/:id', deleteProduct);
 
 export default router;

@@ -19,26 +19,61 @@ const getUserDb = async (id) =>{
     return data
 }
 const insertUserDb = async(firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile) =>{
-    let [data] = await pool.query(`
-        INSERT INTO users
-        (firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile)
-        VALUES (?,?,?,?)
-        `,[firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile])
-    return data
-}
-const deleteUserDb = async(id) =>{
     await pool.query(`
-    DELETE FROM users WHERE userID = ?`, [id])
+        INSERT INTO users (firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile)
+        VALUES (?,?,?,?,?,?,?,?)
+        `,[firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile])
+ 
 }
 
-const updateUserDb = async(id) =>{
-    await pool.query(`
-    UPDATE users
-    SET firstName = ?,lastName = ?, userAge = ?,Gender = ?, userRole = ?,emailAdd = ?,userPass = ?,userProfile = ?  
-    WHERE userID = ?`,[firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile])
-}
+//delete
+const deleteUserDb = async (id) => {
+    try {
+        // Execute the delete query
+        const result = await pool.query(`
+            DELETE FROM users WHERE userID = ?`, [id]);
+
+        // Check if any rows were affected
+        if (result.affectedRows === 0) {
+            console.log(`No user found with ID ${id}.`);
+            throw new Error('User not found'); // Optionally, throw an error to indicate no user was found
+        }
+
+        console.log(`User with ID ${id} deleted successfully.`);
+    } catch (error) {
+        console.error(`Error deleting user with ID ${id}:`, error);
+        throw new Error('Failed to delete user'); // Optionally, throw an error to be caught by the calling function
+    }
+};
+// const deleteUserDb = async(id) =>{
+//     await pool.query(`
+//     DELETE FROM users WHERE userID = ?`, [id])
+// }
+
+//update
+const updateUserDb = async (userID, { firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile }) => {
+    try {
+        await pool.query(`
+            UPDATE users
+            SET firstName = ?,
+                lastName = ?,
+                userAge = ?,
+                Gender = ?,
+                userRole = ?,
+                emailAdd = ?,
+                userPass = ?,
+                userProfile = ?
+            WHERE userID = ?`,
+            [firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile, userID]
+        );
+        console.log(`User with ID ${userID} updated successfully.`);
+    } catch (error) {
+        console.error(`Error updating user with ID ${userID}:`, error);
+        throw new Error('Failed to update user'); // Optionally, throw an error to be handled by the calling function
+    }
+};
 // console.log(await insertPeer('Matthew','23','purple','gatsby'))
-console.log(await getUsersDb());
+// console.log(await getUsersDb());
 // console.log(await getPeer(1));
 export {getUsersDb, getUserDb, insertUserDb, deleteUserDb, updateUserDb}
 
