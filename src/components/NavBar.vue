@@ -10,22 +10,20 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <router-link class="nav-link active" aria-current="page" to="/">Home</router-link>
+              <router-link class="nav-link text-white" to="/" exact
+                active-class="router-link-active">Home</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#about">About</a>
+              <router-link class="nav-link text-white" to="/about">About</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#resume">Resume</a>
+              <router-link class="nav-link text-white" to="/products">Products</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#project">Project</a>
+              <router-link class="nav-link text-white" to="/admin">Admin</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#testimonial">Testimonial</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#reachMe">Reach Me</a>
+              <router-link class="nav-link text-white" to="/contact">Contact</router-link>
             </li>
           </ul>
         </div>
@@ -58,8 +56,8 @@
   .navbar-toggler {
     border: none;
   }
-  
+/*   
   .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%288, 8, 8, 0.7%29' stroke-width='2' linecap='round' linejoin='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-  }
+  } */
   </style>
