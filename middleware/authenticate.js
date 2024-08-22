@@ -1,54 +1,32 @@
-import "dotenv/config.js";
-import bcrypt from "bcrypt";
-import Jwt from "jsonwebtoken";
-const { sign, verify } = Jwt;
+import { compare } from "bcrypt"
+import { loginUserDb } from "../model/usersDb.js"
+import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+dotenv.config()
 
-// Function to hash a password
-async function hashPassword(password) {
-    const saltRounds = 10; // Number of salt rounds
-    return await bcrypt.hash(password, saltRounds);
-}
 
-// Function to create a JWT token, including the hashed password
-async function createToken(user) {
-    const hashedPassword = await hashPassword(user.userPass);
+const checkUser = async(req,res,next)=>{
+    const {emailAdd,userPass} = req.body
+    console.log(emailAdd,userPass);
+    
+    let hashedPassword = (await loginUserDb(emailAdd)).userPass
+    // let hashedPassword = (await loginUserDb(emailAdd))
 
-    return sign(
-        {
-            emailAdd: user.emailAdd,
-            userPass: hashedPassword,  // Store the hashed password
-        },
-        process.env.SECRET_KEY,
-        {
-            expiresIn: '1h'
+    console.log(hashedPassword);
+
+    compare(userPass, hashedPassword, (err,result)=> {
+        console.log(err);
+        
+        if(result==true){
+            let token = jwt.sign({emailAdd:emailAdd},process.env.SECRET_KEY,{expiresIn:'1h'})
+            console.log(token);
+            req.body.token = token
+            next()
+            return
         }
-    );
-}
-
-// Middleware to verify the JWT token
-function verifyToken(req, res, next) {
-    const token = req?.headers['authorization'];
-
-    if (token) {
-        try {
-            const decoded = verify(token, process.env.SECRET_KEY);
-            req.user = decoded;  // Attach decoded token data to the request object
-            next();
-        } catch (error) {
-            res.status(403).json({
-                status: res.statusCode,
-                msg: "Access Denied, Incorrect information was provided."
-            });
-        }
-    } else {
-        res.status(401).json({
-            status: res.statusCode,
-            msg: "Please Log In."
-        });
+        else{
+        res.send('Your password is incorrect')
     }
+    })
 }
-
-export {
-    createToken,
-    verifyToken
-};
+export {checkUser}
