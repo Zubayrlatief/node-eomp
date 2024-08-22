@@ -2,7 +2,7 @@
   <div class="about-info container">
     <div class="row">
       <div class="col-md-6 text-center">
-        <img src="https://i.ibb.co/9H1f8CV/pet-products.png" alt="Pet Products" class="img-fluid pet-image">
+        <img src="" alt="Pet Products" class="img-fluid pet-image">
       </div>
       <div class="col-md-6">
         <h2 class="main-title mt-4 mb-4">Discover What Sets Us Apart</h2>
