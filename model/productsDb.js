@@ -29,12 +29,31 @@ const insertProductDb = async (prodName, quantity, amount, Category, prodUrl) =>
         `, [prodName, quantity, amount, Category, prodUrl]);
 };
 
-//delete
+// //delete
+
 const deleteProductDb = async (prodID) => {
-    await pool.query(`
-    DELETE FROM products
-    WHERE prodID = ?`, [prodID]);
+    try {
+        // Execute the delete query
+        const result = await pool.query(`
+            DELETE FROM products WHERE prodID = ?`, [prodID]);
+
+        // Check if any rows were affected
+        if (result.affectedRows === 0) {
+            console.log(`No product found with ID ${prodID}.`);
+            throw new Error('User not found'); // Optionally, throw an error to indicate no user was found
+        }
+
+        console.log(`product with ID ${prodID} deleted successfully.`);
+    } catch (error) {
+        console.error(`Error deleting product with ID ${prodID}:`, error);
+        throw new Error('Failed to delete product'); // Optionally, throw an error to be caught by the calling function
+    }
 };
+// const deleteProductDb = async (prodID) => {
+//     await pool.query(`
+//     DELETE FROM products
+//     WHERE prodID = ?`, [prodID]);
+// };
 
 
 //update//patch
