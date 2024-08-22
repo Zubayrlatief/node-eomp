@@ -23,7 +23,7 @@
               <router-link class="nav-link text-white" to="/admin">Admin</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link text-white" to="/contact">Contact</router-link>
+              <router-link class="nav-link text-white" to="/contact">Contact Us</router-link>
             </li>
           </ul>
         </div>

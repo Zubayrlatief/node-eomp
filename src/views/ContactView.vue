@@ -18,9 +18,9 @@
                 </div>
                 <div class="details">
                   <h3>Our Address</h3>
-                  <p>123 Pet Lane,</p>
+                  <p>314 Landsdowne,</p>
                   <p>Pet City,</p>
-                  <p>PC1234</p>
+                  <p>3144</p>
                 </div>
               </div>
   
@@ -30,7 +30,7 @@
                 </div>
                 <div class="details">
                   <h3>Phone Number</h3>
-                  <p>(555) 123-4567</p>
+                  <p>021 555 5820</p>
                 </div>
               </div>
               <div class="contact-box">
@@ -41,7 +41,7 @@
                 </div>
                 <div class="details">
                   <h3>Email</h3>
-                  <p>contact@petcare.com</p>
+                  <p>zmpetstore@gmail.com</p>
                 </div>
               </div>
               <div class="contact-box">
@@ -50,16 +50,13 @@
                     <i class="fab fa-instagram" aria-hidden="true"></i>
                   </a>
                 </div>
-                <div class="details">
-                  <h3>Instagram</h3>
-                </div>
               </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-container">
               <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST" @submit.prevent="handleSubmit">
-                <h2 class="form-title">Send Us a Message</h2>
+                <h2 class="form-title">Pop Us a Message</h2>
                 <div class="form-group">
                   <input type="text" name="firstName" placeholder="First Name" required>
                 </div>
@@ -133,7 +130,7 @@
   }
   
   .details h3 {
-    color: #27ae60;
+    color: #512d59;
     font-weight: bold;
   }
   
@@ -175,7 +172,7 @@
   .submit-button {
     width: 100%;
     padding: 10px;
-    background-color: #27ae60;
+    background-color: #583a7a;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -184,7 +181,7 @@
   }
   
   .submit-button:hover {
-    background-color: #1e8449;
+    background-color: #3f3386;
   }
   </style>
   

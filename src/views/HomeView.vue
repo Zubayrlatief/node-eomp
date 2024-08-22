@@ -1,6 +1,6 @@
 <template>
   <div class="container full-screen">
-    <video src="https://mapulecodes.github.io/fridayimages/images/banner2v.mp4" class="video-fluid" autoplay loop muted></video>
+    <video src="https://mapulecodes.github.io/fridayimages/images/banner3.mp4" class="video-fluid" autoplay loop muted></video>
     <img src="https://mapulecodes.github.io/fridayimages/images/Banner.png" class="img-fluid" alt="Landing Image">
     <div class="overlay-content">
       <h1 class="header">Zubayr & Mapule Pet Shop</h1>
@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <!-- Shop By Section -->
+  <!-- Section -->
   <div class="shop-by-section">
     <h2 class="section-title">Shop By</h2>
     <div class="shop-by-grid">
@@ -29,13 +29,13 @@
     </div>
   </div>
 
-  <!-- Testimonials Section -->
+``  <!-- Testimonials -->
   <div class="testimonials-section">
     <h2 class="section-title">What Our Customers Say</h2>
-    <!-- Add your testimonials content here -->
+  
   </div>
 
-  <!-- Featured Products Section -->
+  <!-- Featured Products -->
   <div class="featured-products-section">
     <h2 class="section-title">Featured Products</h2>
     <div class="featured-products-grid">
@@ -47,7 +47,7 @@
         <img src="https://mapulecodes.github.io/fridayimages/images/product2.jpg" alt="Product 2">
         <p>Product 2</p>
       </router-link>
-      <!-- Add more featured products here -->
+      <!-- products -->
     </div>
   </div>
 </template>

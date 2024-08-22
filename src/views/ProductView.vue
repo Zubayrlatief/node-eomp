@@ -3,8 +3,8 @@
       <div class="row">
         <h2 class="display-2">Products</h2>
       </div>
-      <div class="row gap-2 justify-content-center my-2" v-if="filteredProducts.length">
-        <Card v-for="product in sortedProducts" :key="product.productID">
+      <div class="row gap-2 justify-content-center my-2" v-if="filteredProducts?.length">
+        <!-- <Card v-for="product in sortedProducts" :key="product.productID">
           <template #cardHeader>
             {{ product.productURL }}
             <img :src="product.prodURL" loading="lazy" class="img-fluid" :alt="product.prodName">
@@ -19,7 +19,7 @@
               <button class="btn btn-dark">Cart</button>
             </div>
           </template>
-        </Card>
+        </Card> -->
       </div>
       <div v-else>
         <Spinner />
@@ -28,6 +28,14 @@
   </template>
   
   <script>
+  import Spinner from '@/components/Spinner.vue'
+  
+  export default {
+    name: 'ProductList',
+    components: {
+      Spinner,
+    }}
+
   // import { mapState } from 'vuex'
   // import Spinner from '@/components/Spinner.vue'
   // import Card from '@/components/Card.vue'
