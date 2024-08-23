@@ -32,7 +32,7 @@
 //npm i jsonwebtoken
 //"dev":"nodemon index.js"
 import express from 'express'
-
+import cors from 'cors'
 import productsRouter from './routes/productsRouter.js'
 import usersRouter from './routes/usersRouter.js'
 
@@ -41,6 +41,18 @@ const app = express()
 
 app.use(express.static('public'))
 app.use(express.json())
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Methods", "*");
+  res.header("Access-Control-Request-Methods", "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  res.header("Access-Control-Expose-Headers", "Authorization");
+  next()
+})
+
+app.use(cors())
 
 app.use('/products', productsRouter)
 app.use('/users', usersRouter)
