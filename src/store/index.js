@@ -1,8 +1,11 @@
+import axios from 'axios';
 import { createStore } from 'vuex';
+
+const url = 'https://node-eomp-2.onrender.com'
 
 export default createStore({
   state: {
-    products: [], // Example state
+    products: null, // Example state
   },
   mutations: {
     setProducts(state, products) {
@@ -10,13 +13,24 @@ export default createStore({
     },
   },
   actions: {
-    fetchProducts({ commit }) {
+     async fetchProducts({ commit }) {
+      console.log('i tried');
+      
       // Example action to fetch products
-      fetch('/api/products')
-        .then(response => response.json())
-        .then(data => {
-          commit('setProducts', data);
-        });
+      try {
+        console.log('here');
+        
+        const data = await (await axios.get(`${url}/products`)).data
+        console.log(data);
+        commit('setProducts', data);
+      } catch (error) {
+        console.log(error)
+      }
+
+
+      
+
+      
     },
   },
   getters: {

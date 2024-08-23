@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-      <!-- User Management Section -->
+      <!-- User  Section -->
       <div>
         <h2 id="userHeading" class="display-4 mt-4 mb-4">Manage Users</h2>
         <AddUser :user="user" />
@@ -37,7 +37,7 @@
         </div>
       </div>
   
-      <!-- Product Management Section -->
+      <!-- Product  Section -->
       <div class="mt-5">
         <h2 id="productHeading" class="display-4 mb-4">Manage Products</h2>
         <button class="btnAdd" data-bs-toggle="modal" data-bs-target="#addItem">Add Product</button>
@@ -121,7 +121,7 @@
   }
   
   .table {
-    border: 1px solid rgb(39, 142, 86);
+    border: 1px solid rgb(63, 15, 103);
   }
   
   .prod-img {
@@ -132,17 +132,17 @@
   
   .btnAdd {
     float: right;
-    background-color: midnightblue;
+    background-color: rgb(94, 13, 126);
     padding: 10px 20px;
     color: white;
     margin: 10px 0;
-    border: 1px solid midnightblue;
+    border: 1px solid rgb(154, 10, 152);
     border-radius: 5px;
     cursor: pointer;
   }
   
   .btnAdd:hover {
-    background-color: darkblue;
+    background-color: rgb(49, 11, 53);
   }
   
   .btn {
@@ -151,7 +151,7 @@
   }
   
   .btn-danger:hover {
-    background-color: darkred;
+    background-color: rgb(51, 21, 83);
     transform: translateY(-2px);
   }
   
