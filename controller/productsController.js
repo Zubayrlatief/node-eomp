@@ -7,7 +7,7 @@ const fetchProducts = async(req,res)=>{
 
 //fetch//get
 const fetchProduct = async(req,res)=>{
-    res.json(await getProductsDb(req.params.id))
+    res.json(await getProductDb(req.params.id))
 }
 
 //insert//add
@@ -17,16 +17,27 @@ const insertProduct = async(req,res)=>{
     res.send('product was inserted successfully')
 }
 
-//delete
+//delete a product
 const deleteProduct = async(req,res)=>{
     await deleteProductDb(req.params.id)
     res.send('product has been deleted')
 }
 
-//update
-const updateProduct = async(req, res) => {
-    let { prodName, quantity, amount, Category, prodUrl } = req.body;
-    await updateProductDb(req.params.prodID, prodName, quantity, amount, Category, prodUrl);
-    res.send('Product has been updated');
-}
+//update/patch a product
+const updateProduct = async (req, res) => {
+    try {
+        let { prodName, quantity, amount, category, prodUrl} = req.body;
+        let product = await getProductDb(req.params.id);
+        prodName?prodName=prodName:prodName = product.prodName
+        quantity?quantity=quantity:quantity = product.quantity
+        amount?amount=amount:amount = product.amount
+        category?category=category:category = product.category
+        prodUrl?prodUrl=prodUrl:prodUrl = product.prodUrl
+        await updateProductDb(prodName, quantity, amount, category, prodUrl,  req.params.id);
+        res.status(200).send('Product was updated successfully');
+    } catch (error) {
+        res.status(404).send('An error occurred while updating the product');
+    }
+};
+
 export {fetchProducts, fetchProduct, insertProduct, deleteProduct, updateProduct}

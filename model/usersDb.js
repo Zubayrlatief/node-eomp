@@ -22,13 +22,20 @@ const loginUserDb = async (emailAdd) =>{
     const [[data]] = await pool.query('SELECT * FROM users WHERE emailAdd = ?',[emailAdd])
     return data
 }    
-const insertUserDb = async(firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile) =>{
-    await pool.query(`
-        INSERT INTO users (firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile)
-        VALUES (?,?,?,?,?,?,?,?)
-        `,[firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile])
- 
-}
+
+// Insert // Register
+const insertUserDb = async (firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile) => {
+    try {
+        await pool.query(`
+            INSERT INTO users (firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        `, [firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile]);
+        console.log("User inserted successfully.");
+    } catch (error) {
+        console.error("Error inserting user into the database:", error);
+        throw error; 
+    }
+};
 
 //delete
 const deleteUserDb = async (id) => {

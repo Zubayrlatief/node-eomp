@@ -50,7 +50,7 @@ const deleteUser = async(req,res)=>{
 const updateUser = async (req, res) => {
     try {
         const { firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile } = req.body;
-        const userID = req.params.id; // Assuming userID comes from the route parameters
+        const userID = req.params.id; 
 
         // Fetch the current user details
         const existingUser = await getUserDb(userID);

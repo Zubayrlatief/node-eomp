@@ -9,59 +9,56 @@ const pool = createPool({
     password: process.env.PASSWORD
 });
 
+// Get all products
 const getProductsDb = async () => {
     let [data] = await pool.query('SELECT * FROM products');
     return data;
 };
 
+// Get single product from ID
 const getProductDb = async (id) => {
     let [[data]] = await pool.query('SELECT * FROM products WHERE prodID = ?', [id]);
     return data;
 };
 
 
-//insert
+// Insert//add a single product
 const insertProductDb = async (prodName, quantity, amount, Category, prodUrl) => {
-    let [data] = await pool.query(`
-        INSERT INTO products 
-        (prodName, quantity, amount, Category, prodUrl)
-        VALUES (?,?,?,?,?)
+    try {
+        let [data] = await pool.query(`
+            INSERT INTO products 
+            (prodName, quantity, amount, Category, prodUrl)
+            VALUES (?, ?, ?, ?, ?)
         `, [prodName, quantity, amount, Category, prodUrl]);
+        console.log("Product inserted successfully.");
+    } catch (error) {
+        console.error("Error inserting product into the database:", error);
+        throw error;
+    }
 };
 
-// //delete
-
+//delete a product by id
 const deleteProductDb = async (prodID) => {
     try {
-        // Execute the delete query
         const result = await pool.query(`
             DELETE FROM products WHERE prodID = ?`, [prodID]);
 
-        // Check if any rows were affected
         if (result.affectedRows === 0) {
             console.log(`No product found with ID ${prodID}.`);
-            throw new Error('User not found'); // Optionally, throw an error to indicate no user was found
+            throw new Error('User not found');
         }
 
         console.log(`product with ID ${prodID} deleted successfully.`);
     } catch (error) {
         console.error(`Error deleting product with ID ${prodID}:`, error);
-        throw new Error('Failed to delete product'); // Optionally, throw an error to be caught by the calling function
+        throw new Error('Failed to delete product');
     }
 };
-// const deleteProductDb = async (prodID) => {
-//     await pool.query(`
-//     DELETE FROM products
-//     WHERE prodID = ?`, [prodID]);
-// };
 
-
-//update//patch
-const updateProductDb = async (prodID, prodName, quantity, amount, Category, prodUrl) => {
+//update//patch a product
+const updateProductDb = async(prodName, quantity, amount, category, prodUrl, id) =>{
     await pool.query(`
-    UPDATE products
-    SET prodName = ?, quantity = ?, amount = ?, Category = ?, prodUrl = ?
-    WHERE prodID = ?`, [prodName, quantity, amount, Category, prodUrl, prodID]);
-};
-
+        UPDATE products SET prodName = ?,quantity = ? ,amount = ? ,category = ?,prodUrl = ? ,
+        WHERE prodID = ?`, [prodName, quantity, amount, category, prodUrl, id])
+}
 export { getProductsDb, getProductDb, insertProductDb, deleteProductDb, updateProductDb };
