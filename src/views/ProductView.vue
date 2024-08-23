@@ -1,9 +1,10 @@
 <template>
     <div class="container">
+      <div class="background-gradient"></div>
       <div class="row">
         <h2 class="display-2">Products</h2>
       </div>
-      <div class="row gap-2 justify-content-center my-2" v-if="allproducts?.length">
+      <div class="row justify-content-center my-2" v-if="allproducts?.length">
         <!-- <p v-for="(prod, index) in allproducts" :key="index" > {{ prod.prodName }}</p> -->
 
         <Card v-for="(product, index) in allproducts" :key="index">
@@ -58,6 +59,15 @@ import Spinner from '@/components/Spinner.vue'
   </script>
   
   <style scoped>
+  .background-gradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:  linear-gradient(to bottom right, #008080, #001F4D,#666e7a,#554671 ,#3f1d5a); 
+  z-index: -2;
+}
   .container {
     padding: 20px;
   }

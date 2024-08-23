@@ -1,7 +1,18 @@
 <template>
   <div class="container full-screen">
-    <video src="https://mapulecodes.github.io/fridayimages/images/banner3.mp4" class="video-fluid" autoplay loop muted></video>
-    <img src="https://mapulecodes.github.io/fridayimages/images/Banner.png" class="img-fluid" alt="Landing Image">
+    <div class="background-gradient"></div>
+    <video
+      src="https://mapulecodes.github.io/fridayimages/images/banner3.mp4"
+      class="video-fluid"
+      autoplay
+      loop
+      muted
+    ></video>
+    <img
+      src="https://mapulecodes.github.io/fridayimages/images/Banner.png"
+      class="img-fluid"
+      alt="Landing Image"
+    />
     <div class="overlay-content">
       <h1 class="header">Zubayr & Mapule Pet Shop</h1>
       <router-link to="/products">
@@ -19,20 +30,39 @@
     <h2 class="section-title">Shop By</h2>
     <div class="shop-by-grid">
       <router-link to="/puppies" class="shop-by-item">
-        <img src="https://mapulecodes.github.io/fridayimages/images/puppy.jpg" alt="Puppies">
+        <img
+          src="https://mapulecodes.github.io/fridayimages/images/docategory.png"
+          alt="Puppies"
+        />
         <p>Puppies</p>
       </router-link>
       <router-link to="/cats" class="shop-by-item">
-        <img src="https://mapulecodes.github.io/fridayimages/images/cat.jpg" alt="Cats">
+        <img
+          src="https://mapulecodes.github.io/fridayimages/images/catcategory.png"
+          alt="Cats"
+        />
         <p>Cats</p>
       </router-link>
     </div>
   </div>
 
-``  <!-- Testimonials -->
+  <!-- Testimonials -->
   <div class="testimonials-section">
     <h2 class="section-title">What Our Customers Say</h2>
-  
+    <div class="testimonial-item">
+      <img
+        src="https://mapulecodes.github.io/fridayimages/images/susan.jpg"
+        alt="Customer 1"
+      />
+      <p>"The best pet shop I've ever visited! The staff is amazing and so helpful."</p>
+    </div>
+    <div class="testimonial-item">
+      <img
+        src="https://mapulecodes.github.io/fridayimages/images/alex.jpg"
+        alt="Customer 2"
+      />
+      <p>"I found the perfect kitten here. The service was outstanding, and the quality is unmatched."</p>
+    </div>
   </div>
 
   <!-- Featured Products -->
@@ -40,27 +70,42 @@
     <h2 class="section-title">Featured Products</h2>
     <div class="featured-products-grid">
       <router-link to="/products/1" class="featured-product-item">
-        <img src="https://mapulecodes.github.io/fridayimages/images/product1.jpg" alt="Product 1">
+        <img
+          src="https://mapulecodes.github.io/fridayimages/images/product1.jpg"
+          alt="Product 1"
+        />
         <p>Product 1</p>
       </router-link>
       <router-link to="/products/2" class="featured-product-item">
-        <img src="https://mapulecodes.github.io/fridayimages/images/product2.jpg" alt="Product 2">
+        <img
+          src="https://mapulecodes.github.io/fridayimages/images/product2.jpg"
+          alt="Product 2"
+        />
         <p>Product 2</p>
       </router-link>
-      <!-- products -->
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HomeView',
+  name: "HomeView",
 };
 </script>
 
 <style scoped>
+.background-gradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:  linear-gradient(to bottom right, #008080, #001F4D,#666e7a,#554671 ,#3f1d5a); 
+  z-index: -2;
+}
+
 .full-screen {
-  height: calc(100vh - 56px); 
+  height: calc(100vh - 56px);
   width: 100vw;
   position: relative;
   overflow: hidden;
@@ -68,7 +113,7 @@ export default {
 
 .video-fluid {
   width: 100%;
-  height: calc(100vh - 56px);
+  height: 90vh;
   object-fit: cover;
   position: absolute;
   top: 0;
@@ -135,12 +180,32 @@ export default {
   border-radius: 10px;
 }
 
-.shop-by-item p {
-  margin-top: 10px;
-  font-size: 1.2rem;
+.shop-by-item p,
+.featured-product-item p {
+  color: white;
 }
 
-.testimonials-section,
+.testimonials-section {
+  padding: 40px 20px;
+  background:  linear-gradient(to bottom right, #008080, #001F4D,#666e7a); 
+  text-align: center;
+}
+
+.testimonial-item {
+  margin-bottom: 20px;
+}
+
+.testimonial-item img {
+  width: 100px; 
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+.testimonial-item p {
+  font-size: 1.1rem;
+  color: white;
+}
+
 .featured-products-section {
   padding: 40px 20px;
 }

@@ -1,8 +1,9 @@
 <template>
   <div class="about-info container">
+    <div class="background-gradient"></div>
     <div class="row">
       <div class="col-md-6 text-center">
-        <img src="" alt="Pet Products" class="img-fluid pet-image">
+        <img src="https://mapulecodes.github.io/fridayimages//images/zmpetshoplogo.png" alt="Pet Products" class="img-fluid pet-image">
       </div>
       <div class="col-md-6">
         <h2 class="main-title mt-4 mb-4">Discover What Sets Us Apart</h2>
@@ -29,6 +30,15 @@ export default {
 </script>
 
 <style scoped>
+.background-gradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:  linear-gradient(to bottom right, #008080, #001F4D,#666e7a,#554671 ,#3f1d5a); 
+  z-index: -2;
+}
 .about-info {
   padding: 20px;
 }
