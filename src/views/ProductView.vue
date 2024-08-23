@@ -3,23 +3,20 @@
       <div class="row">
         <h2 class="display-2">Products</h2>
       </div>
-      <div class="row gap-2 justify-content-center my-2" v-if="filteredProducts?.length">
-        <!-- <Card v-for="product in sortedProducts" :key="product.productID">
+      <div class="row gap-2 justify-content-center my-2" v-if="allproducts?.length">
+        <!-- <p v-for="(prod, index) in allproducts" :key="index" > {{ prod.prodName }}</p> -->
+
+        <Card v-for="(product, index) in allproducts" :key="index">
           <template #cardHeader>
-            {{ product.productURL }}
+            
             <img :src="product.prodURL" loading="lazy" class="img-fluid" :alt="product.prodName">
           </template>
           <template #cardBody>
-            <h5 class="card-title fw-bold">{{ product.prodName }}</h5>
-            <p class="lead"><span class="text-success fw-bold">Amount</span>: R{{ product.amount }}</p>
-            <div class="button-wrapper d-md-flex d-block justify-content-between">
-              <router-link :to="{ name: 'product', params: { id: product.productID } }">
-                <button class="btn btn-success">View</button>
-              </router-link>
-              <button class="btn btn-dark">Cart</button>
-            </div>
+            <h2>{{product.prodName}}</h2>
+
+
           </template>
-        </Card> -->
+        </Card>
       </div>
       <div v-else>
         <Spinner />
@@ -28,63 +25,36 @@
   </template>
   
   <script>
-  import Spinner from '@/components/Spinner.vue'
+  import Card from '@/components/Card.vue';
+import Spinner from '@/components/Spinner.vue'
+  import store from '@/store'
   
   export default {
     name: 'ProductList',
     components: {
       Spinner,
-    }}
+      Card
+    },
 
-  // import { mapState } from 'vuex'
-  // import Spinner from '@/components/Spinner.vue'
-  // import Card from '@/components/Card.vue'
+    computed : {
+      allproducts(){
+        return store.state.products
+      }
+    },
+    
+    methods: {
+
+      products(){
+        return store.state.products
+      }
+     
+    },
+    mounted() {
+      this.$store.dispatch('fetchProducts')
+    }
   
-  // export default {
-  //   name: 'ProductList',
-  //   components: {
-  //     Spinner,
-  //     Card
-  //   },
-  //   data() {
-  //     return {
-  //       query: '',
-  //       currentFilter: 'All',
-  //       isAscending: true
-  //     }
-  //   },
-  //   computed: {
-  //     ...mapState({
-  //       products: state => state.products
-  //     }),
-  //     filteredProducts() {
-  //       return this.products.filter(product => 
-  //         product.prodName.toLowerCase().includes(this.query.toLowerCase()) &&
-  //         (this.currentFilter === 'All' || product.prodCat.toLowerCase() === this.currentFilter.toLowerCase())
-  //       )
-  //     },
-  //     sortedProducts() {
-  //       return this.filteredProducts.slice().sort((a, b) => {
-  //         return this.isAscending
-  //           ? a.prodName.localeCompare(b.prodName)
-  //           : b.prodName.localeCompare(a.prodName)
-  //       })
-  //     }
-  //   },
-  //   methods: {
-  //     toggleSort() {
-  //       this.isAscending = !this.isAscending
-  //     },
-  //     changeFilter() {
-  //       const filters = ['All', 'leash', 'vest']
-  //       const currentIndex = filters.indexOf(this.currentFilter)
-  //       this.currentFilter = filters[(currentIndex + 1) % filters.length]
-  //     }
-  //   },
-  //   mounted() {
-  //     this.$store.dispatch('fetchProducts')
-  //   }
-  // }
+  }
+
   </script>
   
   <style scoped>
@@ -102,11 +72,11 @@
   }
   
   .btn-success {
-    background-color: #28a745;
+    background-color: #280e39;
   }
   
   .btn-dark {
-    background-color: #343a40;
+    background-color: #1b4774;
   }
   
   .btn-success:hover, .btn-dark:hover {
