@@ -82,13 +82,18 @@
 import AddUser from "../store/index";
 import updateUser from "../store/index";
 import updateProduct from "../store/index";
+// import { Spinner } from "@/components/Spinner.vue";
 
 export default {
+  name: "AdminDashboard",
   components: {
+    // Spinner,
     AddUser,
     updateUser,
     updateProduct,
+
   },
+
   computed: {
     users() {
       return this.$store.state.users;

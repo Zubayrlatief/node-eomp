@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <!-- Section -->
+  <!-- Shop By Section -->
   <div class="shop-by-section">
     <h2 class="section-title">Shop By</h2>
     <div class="shop-by-grid">
@@ -68,29 +68,48 @@
   <!-- Featured Products -->
   <div class="featured-products-section">
     <h2 class="section-title">Featured Products</h2>
-    <div class="featured-products-grid">
-      <router-link to="/products/1" class="featured-product-item">
-        <img
-          src="https://mapulecodes.github.io/fridayimages/images/product1.jpg"
-          alt="Product 1"
-        />
-        <p>Product 1</p>
-      </router-link>
-      <router-link to="/products/2" class="featured-product-item">
-        <img
-          src="https://mapulecodes.github.io/fridayimages/images/product2.jpg"
-          alt="Product 2"
-        />
-        <p>Product 2</p>
-      </router-link>
+    <div v-if="latestProducts && latestProducts.length" class="row gap-2 justify-content-center products-div">
+      <div v-for="product in latestProducts" :key="product.prodID" class="product-item">
+        <img :src="product.prodURL" alt="Product Image" class="prod-img">
+        <h5>{{ product.prodName }}</h5>
+        <p>R{{ product.amount }}</p>
+      </div>
+    </div>
+    <div v-else>
+      <Spinner />
     </div>
   </div>
 </template>
 
 <script>
+import Spinner from '@/components/Spinner.vue'
+
 export default {
-  name: "HomeView",
-};
+  name: 'HomeView',
+  components: {
+    Spinner
+  },
+  data() {
+    return {
+      latestProducts: null
+    };
+  },
+  async mounted() {
+    await this.fetchLatestProducts();
+  },
+  methods: {
+    async fetchLatestProducts() {
+      try {
+        await this.$store.dispatch('fetchProducts');
+        const products = this.$store.getters.recentProducts;
+        console.log('Fetched products:', products); 
+        this.latestProducts = products.length > 2 ? products.slice(0, 2) : products;
+      } catch (error) {
+        console.error("Failed to fetch the latest products:", error);
+      }
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -100,7 +119,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background:  linear-gradient(to bottom right, #008080, #001F4D,#666e7a,#554671 ,#3f1d5a); 
+  background: linear-gradient(to bottom right, #008080, #001F4D, #666e7a, #554671, #3f1d5a); 
   z-index: -2;
 }
 
@@ -180,14 +199,9 @@ export default {
   border-radius: 10px;
 }
 
-.shop-by-item p,
-.featured-product-item p {
-  color: white;
-}
-
 .testimonials-section {
   padding: 40px 20px;
-  background:  linear-gradient(to bottom right, #008080, #001F4D,#666e7a); 
+  background: linear-gradient(to bottom right, #008080, #001F4D, #666e7a); 
   text-align: center;
 }
 
@@ -201,6 +215,7 @@ export default {
   border-radius: 50%;
   margin-bottom: 10px;
 }
+
 .testimonial-item p {
   font-size: 1.1rem;
   color: white;
@@ -210,26 +225,29 @@ export default {
   padding: 40px 20px;
 }
 
-.featured-products-grid {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.featured-product-item {
+.product-item {
   text-align: center;
+  margin: 0 auto; 
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  perspective: 1000px; 
 }
 
-.featured-product-item img {
+.prod-img {
+  transition: transform 0.6s;
+  transform-style: preserve-3d; 
+}
+
+.product-item:hover .prod-img {
+  transform: rotateY(180deg); 
+}
+
+.prod-img {
   width: 200px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.featured-product-item p {
-  margin-top: 10px;
-  font-size: 1.2rem;
+  height: auto;
+  border: 2px solid rgb(120, 32, 142); 
+  display: block; 
 }
 
 @media screen and (max-width: 768px) {
@@ -261,7 +279,7 @@ export default {
   }
 
   .shop-by-item img,
-  .featured-product-item img {
+  .prod-img {
     width: 100%;
     height: auto;
   }
