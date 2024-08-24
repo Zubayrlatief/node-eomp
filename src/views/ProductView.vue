@@ -26,6 +26,7 @@
   </template>
   
   <script>
+  
   import Card from '@/components/Card.vue';
 import Spinner from '@/components/Spinner.vue'
   import store from '@/store'
