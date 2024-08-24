@@ -68,7 +68,7 @@
   <!-- Featured Products -->
   <div class="featured-products-section">
     <h2 class="section-title">Featured Products</h2>
-    <div v-if="latestProducts && latestProducts.length" class="row gap-2 justify-content-center products-div">
+    <div v-if="latestProducts && latestProducts.length" class="row justify-content-center products-div">
       <div v-for="product in latestProducts" :key="product.prodID" class="product-item">
         <img :src="product.prodURL" alt="Product Image" class="prod-img">
         <h5>{{ product.prodName }}</h5>
@@ -103,7 +103,7 @@ export default {
         await this.$store.dispatch('fetchProducts');
         const products = this.$store.getters.recentProducts;
         console.log('Fetched products:', products); 
-        this.latestProducts = products.length > 2 ? products.slice(0, 2) : products;
+        this.latestProducts = products.length > 4 ? products.slice(0, 4) : products;
       } catch (error) {
         console.error("Failed to fetch the latest products:", error);
       }
@@ -225,63 +225,38 @@ export default {
   padding: 40px 20px;
 }
 
-.product-item {
-  text-align: center;
-  margin: 0 auto; 
+.products-div {
   display: flex;
-  flex-direction: column;
-  align-items: center; 
-  perspective: 1000px; 
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.product-item {
+  flex: 1 1 200px;
+  max-width: 200px;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .prod-img {
+  width: 100%;
+  height: 200px; 
+  object-fit: cover; 
+  border: 2px solid rgb(120, 32, 142);
+  display: block;
   transition: transform 0.6s;
-  transform-style: preserve-3d; 
+  transform-style: preserve-3d;
 }
 
 .product-item:hover .prod-img {
-  transform: rotateY(180deg); 
+  transform: rotateY(180deg);
 }
 
-.prod-img {
-  width: 200px;
-  height: auto;
-  border: 2px solid rgb(120, 32, 142); 
-  display: block; 
+.product-item h5,
+.product-item p {
+  margin: 10px 0 0;
 }
 
-@media screen and (max-width: 768px) {
-  .video-fluid {
-    display: none;
-  }
-  .img-fluid {
-    display: block;
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-  .overlay-content {
-    display: none;
-  }
-  .mobile-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    color: white;
-    text-align: center;
-  }
-
-  .shop-by-grid,
-  .featured-products-grid {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .shop-by-item img,
-  .prod-img {
-    width: 100%;
-    height: auto;
-  }
-}
 </style>
