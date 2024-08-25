@@ -1,53 +1,79 @@
-import axios from 'axios';
 import { createStore } from 'vuex';
-import { toast } from "vue3-toastify";
-import "vue3-toastify/dist/index.css";
+import axios from 'axios';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
-const url = 'https://node-eomp-2.onrender.com';
+const apiURL = 'https://node-eomp-2.onrender.com';
 
 export default createStore({
   state: {
     products: null,
     users: null,
     currentUser: null,
+    product: null,
+    isLoading: false 
   },
   mutations: {
-    setProducts(state, products) {
-      state.products = products;
+    setProducts(state, value) {
+      state.products = value;
     },
-    setUsers(state, users) {
-      state.users = users;
+    setProduct(state, value) {
+      state.product = value;
     },
-    setCurrentUser(state, user) {
-      state.currentUser = user;
+    setUsers(state, value) {
+      state.users = value;
     },
+    setCurrentUser(state, value) {
+      state.currentUser = value;
+    },
+    setLoading(state, value) {
+      state.isLoading = value;
+    }
   },
   actions: {
     async fetchProducts({ commit }) {
+      commit('setLoading', true); 
       try {
-        const data = await (await axios.get(`${url}/products`)).data;
+        const { data } = await axios.get(`${apiURL}/products`);
         commit('setProducts', data);
         toast.success("Products fetched successfully!");
       } catch (error) {
         console.error(error);
         toast.error("Failed to fetch products.");
+      } finally {
+        commit('setLoading', false); 
+      }
+    },
+    async fetchProduct({ commit }, productId) {
+      commit('setLoading', true); 
+      try {
+        const { data } = await axios.get(`${apiURL}/products/${productId}`);
+        commit('setProduct', data);
+        toast.success("Product fetched successfully!");
+      } catch (error) {
+        console.error(error);
+        toast.error("Failed to fetch product.");
+      } finally {
+        commit('setLoading', false); 
       }
     },
     async fetchUsers({ commit }) {
+      commit('setLoading', true); 
       try {
-        const data = await (await axios.get(`${url}/users`)).data;
+        const { data } = await axios.get(`${apiURL}/users`);
         commit('setUsers', data);
         toast.success("Users fetched successfully!");
       } catch (error) {
         console.error(error);
         toast.error("Failed to fetch users.");
+      } finally {
+        commit('setLoading', false); 
       }
     },
     async login({ commit }, credentials) {
       try {
-        const response = await axios.post(`${url}/login`, credentials);
-        const user = response.data;
-        commit('setCurrentUser', user);
+        const { data } = await axios.post(`${apiURL}/login`, credentials);
+        commit('setCurrentUser', data);
         toast.success("Login successful!");
       } catch (error) {
         console.error(error);
@@ -56,15 +82,14 @@ export default createStore({
     },
     async register({ commit }, userData) {
       try {
-        const response = await axios.post(`${url}/register`, userData);
-        const user = response.data;
-        commit('setCurrentUser', user);
+        const { data } = await axios.post(`${apiURL}/register`, userData);
+        commit('setCurrentUser', data);
         toast.success("Registration successful!");
       } catch (error) {
         console.error(error);
         toast.error("Registration failed. Please try again.");
       }
-    },
+    }
   },
   getters: {
     recentProducts: state => {
@@ -73,11 +98,13 @@ export default createStore({
     allUsers: state => {
       return state.users;
     },
-    isLoggedIn: state => {
-      return state.currentUser !== null;
+    currentProduct: state => {
+      return state.product;
     },
     currentUser: state => {
       return state.currentUser;
     },
+    isLoading: state => state.isLoading 
   },
+  modules: {}
 });

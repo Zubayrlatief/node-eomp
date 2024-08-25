@@ -4,25 +4,28 @@
     <div class="row">
       <h2 class="display-2">Products</h2>
     </div>
-    <div class="row justify-content-center my-2" v-if="allproducts?.length">
-      <Card v-for="(product, index) in allproducts" :key="index">
-        <template #cardHeader>
-          <img :src="product.prodURL" loading="lazy" class="img-fluid" :alt="product.prodName">
-        </template>
-        <template #cardBody>
-          <div class="product-info">
-         
+    <div class="row justify-content-center my-2" v-if="allproducts.length">
+      <div 
+        v-for="(product, index) in allproducts" 
+        :key="index" 
+        class="col-lg-3 col-md-4 col-sm-6 mb-4"
+        @click="goToProductDetails(product.prodID)">
+        <Card>
+          <template #cardHeader>
+            <img 
+              :src="product.prodURL" 
+              loading="lazy" 
+              class="img-fluid prod-img" 
+              :alt="product.prodName" />
+          </template>
+          <template #cardBody>
             <div class="product-details">
-              <p>ID: {{ product.prodID }}</p>
-              <p>Name: {{ product.prodName }}</p>
-              <p>Category: {{ product.Category }}</p>
-              <p>Quantity: {{ product.quantity }}</p>
-              <p>Price: R {{ product.amount }}</p>
+              <p class="product-name">{{ product.prodName }}</p>
+              <p class="product-price">R {{ product.amount }}</p>
             </div>
-            <updateProduct :product="product" />
-          </div>
-        </template>
-      </Card>
+          </template>
+        </Card>
+      </div>
     </div>
     <div v-else>
       <Spinner />
@@ -33,22 +36,21 @@
 <script>
 import Card from '@/components/Card.vue';
 import Spinner from '@/components/Spinner.vue';
-import store from '@/store';
 
 export default {
-  name: 'ProductList',
+  name: 'ProductView',
   components: {
     Spinner,
     Card
   },
   computed: {
     allproducts() {
-      return store.state.products;
+      return this.$store.state.products;
     }
   },
   methods: {
-    products() {
-      return store.state.products;
+    goToProductDetails(productId) {
+      this.$router.push({ name: 'product', params: { id: productId } });
     }
   },
   mounted() {
@@ -75,29 +77,30 @@ export default {
   height: auto;
 }
 .prod-img {
-  max-width: 100px; 
-  height: auto;
-}
-.product-info {
-  display: flex;
-  align-items: center;
+  max-width: 100%; 
+  height: 200px;
+  object-fit: cover;
 }
 .product-details {
-  margin-left: 20px;
+  text-align: center;
+  margin-top: 10px;
 }
-.button-wrapper button {
-  margin: 5px;
+.product-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #1b4774;
 }
-.btn-success {
-  background-color: #280e39;
+.product-price {
+  font-size: 1.2rem;
+  color: #280e39;
+  margin-top: 5px;
 }
-.btn-dark {
-  background-color: #1b4774;
-}
-.btn-success:hover, .btn-dark:hover {
-  opacity: 0.8;
-}
-.spinner {
-  margin-top: 20px;
+@media (max-width: 768px) {
+  .col-md-4 {
+    max-width: 50%;
+  }
+  .col-sm-6 {
+    max-width: 100%;
+  }
 }
 </style>
