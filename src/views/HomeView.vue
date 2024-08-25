@@ -1,6 +1,7 @@
 <template>
   <div class="container full-screen">
     <div class="background-gradient"></div>
+    <div class="row">
     <video
       src="https://mapulecodes.github.io/fridayimages/images/banner3.mp4"
       class="video-fluid" autoplay loop muted ></video>
@@ -17,7 +18,7 @@
       <a href="#products" class="btn btn-primary shop-btn">Shop Now</a>
     </div>
   </div>
-
+</div>
   <!-- Shop By Section -->
   <div class="shop-by-section">
     <h2 class="section-title">Shop By</h2>
@@ -115,27 +116,26 @@ export default {
   background: linear-gradient(to bottom right, #008080, #001F4D, #666e7a, #554671, #3f1d5a); 
   z-index: -2;
 }
-
 .full-screen {
-  height: calc(100vh - 56px);
+  height: calc(100vh - 56px); 
   width: 100vw;
   position: relative;
   overflow: hidden;
 }
 
-.video-fluid {
+.media-fluid {
   width: 100%;
-  height: 90vh;
+  height: 100%;
   object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
 }
 
 .img-fluid {
   display: none;
 }
+
 
 .overlay-content {
   position: absolute;
@@ -154,15 +154,41 @@ export default {
 .header {
   font-size: 2rem;
   margin-bottom: 20px;
-  color: white;
+  color: white; 
 }
 
 .contact-btn {
+  margin-bottom: 20px;
   font-size: 1.25rem;
+  z-index: 10;
 }
 
-.mobile-content {
-  display: none;
+.text {
+  margin-top: 20px; 
+}
+
+@media screen and (max-width: 768px) {
+  .video-fluid {
+    display: none;
+  }
+  .img-fluid {
+    display: block;
+    position: relative;
+  }
+  .overlay-content {
+     display: none;
+  }
+  .mobile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: white; 
+   
+  }
+  .header {
+    color: white; 
+  }
 }
 
 .shop-by-section {
