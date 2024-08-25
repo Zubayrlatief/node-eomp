@@ -11,12 +11,13 @@
       <div class="row">
         <div class="col-md-6">
           <div class="contact-details">
+            <!-- Contact Details -->
             <div class="contact-box">
               <img src="https://mapulecodes.github.io/fridayimages//images/zmpetshoplogo.png" alt="Decorative Image">
               <div class="details">
                 <h3>Our Address</h3>
                 <p>314 Landsdowne,</p>
-                <p>Cape Town,</p>
+                <p>Cape Town</p>
                 <p>3144</p>
               </div>
             </div>
@@ -36,21 +37,11 @@
                 <p>zmpetstore@gmail.com</p>
               </div>
             </div>
-
-            <div class="contact-box">
-              <img src="https://mapulecodes.github.io/fridayimages//images/zmpetshoplogo.png" alt="Decorative Image">
-              <div class="details">
-                <h3>Social Media</h3>
-                <a class="social-link" href="https://www.instagram.com/petcare">
-                  <i class="fab fa-instagram" aria-hidden="true"></i>
-                </a>
-              </div>
-            </div>
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-container">
-            <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST" @submit.prevent="handleSubmit">
+            <form ref="contactForm" class="contact-form" action="https://formspree.io/f/your-form-id" method="POST" @submit.prevent="handleSubmit">
               <h2 class="form-title">Pop Us a Message</h2>
               <div class="form-group">
                 <input type="text" name="firstName" placeholder="First Name" required>
@@ -82,7 +73,8 @@
 export default {
   methods: {
     handleSubmit() {
-      this.$refs.contactForm.submit();
+  
+      alert('Form submitted successfully!');
     }
   }
 }
@@ -134,9 +126,9 @@ export default {
 }
 
 .contact-box img {
-  width: 100px; /* Adjust width as needed */
+  width: 100px;
   height: auto;
-  margin-right: 15px; /* Space between image and text */
+  margin-right: 15px; 
 }
 
 .details {
@@ -153,8 +145,7 @@ export default {
 }
 
 .address-link, .email-link, .social-link {
-  color: #34495e;
-  text-decoration: none;
+  color: #325272;
 }
 
 .form-container {

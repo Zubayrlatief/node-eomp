@@ -3,15 +3,8 @@
     <div class="background-gradient"></div>
     <video
       src="https://mapulecodes.github.io/fridayimages/images/banner3.mp4"
-      class="video-fluid"
-      autoplay
-      loop
-      muted
-    ></video>
-    <img
-      src="https://mapulecodes.github.io/fridayimages/images/Banner.png"
-      class="img-fluid"
-      alt="Landing Image"
+      class="video-fluid" autoplay loop muted ></video>
+    <img src="https://mapulecodes.github.io/fridayimages/images/Banner.png" class="img-fluid" alt="Landing Image"
     />
     <div class="overlay-content">
       <h1 class="header">Zubayr & Mapule Pet Shop</h1>
