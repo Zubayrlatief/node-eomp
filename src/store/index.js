@@ -89,6 +89,46 @@ export default createStore({
         console.error(error);
         toast.error("Registration failed. Please try again.");
       }
+    },
+    async addUser({ dispatch }, user) {
+      try {
+        await axios.post(`${apiURL}/users`, user);
+        dispatch('fetchUsers'); 
+        toast.success("User added successfully!");
+      } catch (error) {
+        console.error(error);
+        toast.error("Failed to add user.");
+      }
+    },
+    async deleteUser({ dispatch }, userID) {
+      try {
+        await axios.delete(`${apiURL}/users/${userID}`);
+        dispatch('fetchUsers'); 
+        toast.success("User deleted successfully!");
+      } catch (error) {
+        console.error(error);
+        toast.error("Failed to delete user.");
+      }
+    },
+    async addProduct({ dispatch }, product) {
+      try {
+        await axios.post(`${apiURL}/products`, product);
+        dispatch('fetchProducts');
+        toast.success("Product added successfully!");
+      } catch (error) {
+        console.error(error);
+        toast.error("Failed to add product.");
+      }
+    },
+    async deleteProduct({ dispatch }, prodID) {
+      try {
+        await axios.delete(`${apiURL}/products/${prodID}`);
+        dispatch('fetchProducts'); 
+        toast.success("Product deleted successfully!");
+      } catch (error) {
+        console.error(error);
+        toast.error("Failed to delete product.");
+      }
     }
   },
   getters: {
